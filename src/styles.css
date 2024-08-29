@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+/* Estilo para notificaciones de éxito */
+.custom-toast-success,
+.custom-toast-error {
+    color: white !important;
+    font-size: 16px;
+    width: max-content;
+    padding: 10px;
+    position: fixed;
+    top: 50px;
+    right: 0;
+    z-index: 9999;
+}
+
+.custom-toast-success {
+    background-color: #28a745 !important;
+
+}
+
+.custom-toast-error {
+    background-color: #a72828 !important;
+}

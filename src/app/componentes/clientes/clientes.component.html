@@ -1,0 +1,145 @@
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Agregar Cliente
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="clientes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de Clientes</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Saldo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of clientes; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>{{cliente.nombre}} {{cliente.apellido}}</td>
+                                <td>{{cliente.saldo | currency: 'MNX': '$'}}</td>
+                                <td>
+                                    <a routerLink="/cliente/editar/{{cliente.id}}" class="btn btn-secondary">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                        Editar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tarjetas laterales -->
+            <div class="col-md-3">
+                <div class="card text-center bg-danger text-white mb-3">
+                    <div class="card-body">
+                        <h3>Saldo Total</h3>
+                        <h4 class="display-4">
+                            {{getSaldoTotal() | currency: 'MNX': '$'}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="card text-center bg-success text-white mb-3">
+                    <div class="card-body">
+                        <h3>Total Clientes</h3>
+                        <h4 class="display-4">
+                            <i class="fa fa-users" aria-hidden="true"></i> {{clientes.length}}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Agregar cliente modal -->
+<div id="agregarClienteModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Agregar Cliente</h5>
+                <button class="btn-close" data-bs-dismiss="modal" #botonCerrar>
+                </button>
+            </div>
+            <form #clienteForm="ngForm" (ngSubmit)="agregar(clienteForm)">
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label for="nombre">Nombre</label>
+
+                        <input class="form-control" type="text" name="nombre" #nombre="ngModel"
+                            [(ngModel)]="cliente.nombre" [ngClass]="{'is-invalid': nombre.errors && nombre.touched}"
+                            required minlength="2">
+
+                        <div *ngIf="nombre.errors && nombre.touched" class="text-danger">
+                            <div *ngIf="nombre.errors['required']">
+                                Nombre requerido.
+                            </div>
+                            <div *ngIf="nombre.errors['minlength']">
+                                Debe contener al menos 2 caracteres.
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="apellido">Apellido</label>
+                        <input class="form-control" type="text" name="apellido" #apellido="ngModel"
+                            [(ngModel)]="cliente.apellido"
+                            [ngClass]="{'is-invalid': apellido.errors && apellido.touched}" required minlength="2">
+
+                        <div *ngIf="apellido.errors && apellido.touched" class="text-danger">
+                            <div *ngIf="apellido.errors['required']">
+                                Apellido requerido.
+                            </div>
+                            <div *ngIf="apellido.errors['minlength']">
+                                Debe contener al menos 2 caracteres.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" name="email" #email="ngModel"
+                            [(ngModel)]="cliente.email" [ngClass]="{'is-invalid': email.errors && email.touched}"
+                            required>
+
+                        <div *ngIf="email.errors && email.touched" class="text-danger">
+                            <div *ngIf="email.errors['required']">
+                                Email requerido.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="saldo">Saldo</label>
+                        <input class="form-control" type="number" name="saldo" #saldo="ngModel"
+                            [(ngModel)]="cliente.saldo" [ngClass]="{'is-invalid': saldo.errors && saldo.touched}"
+                            required>
+
+                        <div *ngIf="saldo.errors && saldo.touched" class="text-danger">
+                            <div *ngIf="saldo.errors['required']">
+                                Saldo requerido.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
