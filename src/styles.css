@@ -10,6 +10,7 @@
     top: 50px;
     right: 0;
     z-index: 9999;
+    border-radius: 10px;
 }
 
 .custom-toast-success {
@@ -19,4 +20,14 @@
 
 .custom-toast-error {
     background-color: #a72828 !important;
+}
+
+.distribucion {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+body{
+    background-color: gray;
 }

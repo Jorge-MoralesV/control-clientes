@@ -1,15 +1,18 @@
-<section id="actions" class="py-4 mb-4 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <button class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Agregar Cliente
-                </button>
+<div class="container">
+    <section id="actions" class="py-4 mb-4 bg-light mt-4 rounded">
+        <div class="container">
+            <div class="row">
+                <div class="d-grid gap-2 col-3 mx-auto">
+                    <button class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#agregarClienteModal">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Agregar Cliente
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <section id="clientes">
     <div class="container">
@@ -21,7 +24,7 @@
                     </div>
                     <table class="table table-striped">
                         <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-center">
                                 <th>#</th>
                                 <th>Nombre</th>
                                 <th>Saldo</th>
@@ -29,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let cliente of clientes; let i = index">
+                            <tr class="text-center" *ngFor="let cliente of clientes; let i = index">
                                 <td>{{i+1}}</td>
                                 <td>{{cliente.nombre}} {{cliente.apellido}}</td>
                                 <td>{{cliente.saldo | currency: 'MNX': '$'}}</td>
